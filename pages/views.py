@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -34,9 +34,6 @@ class HomeView(View):
         )
         
         
-        
-        
-
 class InfoListView(ListView):
     model = Info
     template_name = "pages/list.html"
@@ -58,10 +55,8 @@ class InfoListView(ListView):
             "pages/home.html",
             context={"form": form},
         )
-
-
-    
-
+        
+  
 
 
 class InfoCreateView(CreateView):
@@ -69,3 +64,55 @@ class InfoCreateView(CreateView):
     form_class = InfoForm
     template_name = 'pages/create_cv.html'
     success_url = reverse_lazy('pages:home')
+    
+    
+    
+    
+class InfoUpdateView(UpdateView):
+    model = Info
+    template_name = "update_cv.html"
+    form_class = InfoForm
+
+    def get_success_url(self):
+        return reverse_lazy("pages:home")   
+    
+    def get(self, request, pk):
+        info = Info.objects.get(pk=pk)
+        form = InfoForm(instance=info)
+        return render(
+            request,
+            "pages/update_cv.html",
+            context={"form": form},
+        )
+
+    def post(self, request, pk):
+        info = Info.objects.get(pk=pk)
+        form = InfoForm(request.POST, instance=info)
+        if form.is_valid():
+            ...  # traiter
+            return redirect("pages:home")
+        return render(
+            request,
+            "pages/update_cv.html",
+            context={"form": form},
+        )
+        
+class InfoDeleteView(DeleteView):
+    model = Info
+    template_name = "pages/delete_cv.html"
+    success_url = reverse_lazy("pages:home")
+    
+    def get(self, request, pk):
+        info = Info.objects.get(pk=pk)
+        return render(
+            request,
+            "pages/delete_cv.html",
+            context={"info": info},
+        )
+
+    def post(self, request, pk):
+        info = Info.objects.get(pk=pk)
+        info.delete()
+        return redirect("pages:home")
+    
+    

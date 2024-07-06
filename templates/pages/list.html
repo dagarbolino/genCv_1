@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<header class="container mx-auto mb-6 flex flex-col justify-center items-center">
+<header class="container mx-auto m-6 flex flex-col justify-center items-center">
     <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
     {% if user.is_authenticated %}
         <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
@@ -19,109 +19,110 @@
             <p class="mt-2">Créez votre CV en quelques clics</p>
             <a href="{% url 'pages:create_cv' %}" class="btn btn-primary mt-4">Créer un CV</a>
         </div>
-
     </section>
 
-    <section class=" grid grid-cols-1 md:grid-cols-1 gap-4">
+    <section class="flex flex-col w-full h-screen">
       <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4'>Information des cv</h1>
-      <div class="container mx-auto">
+      <div class="container mx-auto flex flex-col">
         {% for info in infos %}
-        <div class="info-field mt-2 flex flex-row justify-center items-center">
-          <p class='text-2xl font-semibold'>{{ info.title }}</p>
-          
+        <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10'>
+
+          <p class='w-full text-4xl font-semibold'>{{ info.title }}</p>
+
+          <a href="" class="btn btn-primary w-44 mx-4">Supprimer le CV</a>
+          <a href="" class="btn btn-primary w-44">Modifier le CV</a>
         </div>
-
-          <div class=" border-2 rounded-md my-6 p-2">
-            <div class="info-field mt-2"><strong>Nom:</strong> {{ info.lastname }}</div>
-            <div class="info-field mt-2"><strong>Prénom:</strong> {{ info.firstname }}</div>
-            <div class="info-field mt-2"><strong>Adresse:</strong> {{ info.address }}</div>
-            <div class="info-field mt-2"><strong>Ville:</strong> {{ info.city }}</div>
-            <div class="info-field mt-2"><strong>code postal:</strong> {{ info.zip_code }}</div>
-            <div class="info-field mt-2"><strong>Etat:</strong> {{ info.state }}</div>
-            <div class="info-field mt-2"><strong>Téléphone:</strong> {{ info.phone }}</div>
-            <div class="info-field mt-2"><strong>Email:</strong> {{ info.email }}</div>
-            <div class="info-field mt-2"><strong>Lieux de naissance:</strong>.... </div>
-            <div class="info-field mt-2"><strong>Date de naissance:</strong>.... </div>
-
-
-            <div class="info-field mt-2">
-              <strong>Photo:</strong>
-              <img 
-              class='w-32 h-32 rounded-full border-2 border-gray-400 mt-2'
-              src="{{ info.photo.url }}" alt="Photo de {{ info.firstname }} {{ info.lastname }}">
-            </div>
-
-
-            <div 
-              class="info-field mt-2">
-              <strong>Motivation:</strong> 
-              <p class='px-4'>{{ info.motivation }}</p>
-            </div>
+          <div class='flex flex-row justify-start items-start w-full  border-2 p-4'>
 
             
-            <div class="info-field mt-2 border-2 p-2">
-              <strong>Hobbies:</strong>
-              <div class='px-4'>
-              {% for hobby in info.hobbies.all %}
-                {{ hobby.title_hobby }}{% if not forloop.last %},<br/> {% endif %}
-              {% endfor %}
+            <div class='flex flex-col w-1/4  h-full'>
+              <div class="flex justify-center items-center w-full my-2">
+                <img 
+                class='w-52 h-52 rounded-full border-2 border-gray-400 object-cover'
+                src="{{ info.photo.url }}" alt="Photo de {{ info.firstname }} {{ info.lastname }}">
+              </div>
+              <div class="info-field mt-2"><strong>Nom:</strong> {{ info.lastname }}</div>
+              <div class="info-field mt-2"><strong>Prénom:</strong> {{ info.firstname }}</div>
+              <div class="info-field mt-2"><strong>Adresse:</strong> {{ info.address }}</div>
+              <div class="info-field mt-2"><strong>Ville:</strong> {{ info.city }}</div>
+              <div class="info-field mt-2"><strong>code postal:</strong> {{ info.zip_code }}</div>
+              <div class="info-field mt-2"><strong>Etat:</strong> {{ info.state }}</div>
+              <div class="info-field mt-2"><strong>Téléphone:</strong> {{ info.phone }}</div>
+              <div class="info-field mt-2"><strong>Email:</strong> {{ info.email }}</div>
+              <div class="info-field mt-2"><strong>Lieux de naissance:</strong>.... </div>
+              <div class="info-field mt-2"><strong>Date de naissance:</strong>.... </div>
+
+              <div class="info-field mt-2  p-2">
+                <strong>Hobbies:</strong>
+                <div class='px-4'>
+                  {% for hobby in info.hobbies.all %}
+                    - {{ hobby.title_hobby }}{% if not forloop.last %},<br/> {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="info-field mt-2  p-2">
+                <strong>Langues:</strong>
+                <div class='px-4'>
+                  {% for language in info.languages.all %}
+                      - {{ language.title_language }} : {{ language.niveau_language }}
+                    {% if not forloop.last %}, <br/> {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="info-field mt-2  p-2">
+                <strong>Compétences:</strong>
+                <div class='px-4'>
+                  {% for skill in info.skills.all %}
+                    - {{ skill.title_Skill }}
+                    {% if not forloop.last %},<br/>{% endif %}
+                  {% endfor %}
+                </div>
               </div>
             </div>
 
-            <div class="info-field mt-2 border-2 p-2">
-              <strong>Langues:</strong>
-              <div class='px-4'>
-              {% for language in info.languages.all %}
-                {{ language.title_language }}{% if not forloop.last %}, {% endif %}
-              {% endfor %}
-              </div>
-            </div>
 
+            <span class='w-2 mx-4 h-full bg-slate-50 rounded-md'></span>
 
-            <div class="info-field mt-2 border-2 p-2">
-              <strong>Compétences:</strong>
-              <div class='px-4'>
-                {% for skill in info.skills.all %}
-                  {{ skill.title_Skill }}
-                  {% if not forloop.last %},<br/>{% endif %}
-                {% endfor %}
+            <div class="flex flex-col justify-start items-center w-3/4 h-full">
+              <div class=" border-2 rounded-md my-6 p-2 flex flex-col w-full md:min-h-36">
+              
+                  <p class='px-4 mt-6'>{{ info.motivation }}</p>
               </div>
-            </div>
 
-            <div class="info-field mt-2 border-2 p-2">
-              <strong>Experiences:</strong>
-              <div class='px-4'>
-                {% for experience in info.experiences.all %}
-                  <p class='text-xl underline'> {{ experience.title_experience }}: </p>
-                  <p><strong>Titre:</strong> {{ experience.description_experience }}</p>
-                  <p><strong>Date:</strong> {{ experience.date_experience }}</p>
-                  <p><strong>Lieux:</strong> {{ experience.location_experience }}</p>
-                  
-                  {% if not forloop.last %}<br/>{% endif %}
-                {% endfor %}
-              </div>
-            </div> 
-            
-            <div class="info-field mt-2 border-2 p-2">
-              <strong>Formations:</strong>
-              <div class='px-4'>
-                {% for formation in info.formations.all %}
-                  <p class='text-xl underline'> {{ formation.title_formation }}: </p>
-                  <p><strong>Titre:</strong> {{ formation.description_formation }}</p>
-                  <p><strong>Date:</strong> {{ formation.date_formation }}</p>
-                  <p><strong>Lieux:</strong> {{ formation.location_formation }}</p>
-                  
-                  {% if not forloop.last %}<br/>{% endif %}
-                {% endfor %}
-              </div>
+              <span class='w-full mx-4 h-2 bg-slate-50 rounded-md'></span>
+
+              <div class="info-field my-6  p-2 w-full">
+                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6">Experiences:</h3>
+                <div class='px-4'>
+                  {% for experience in info.experiences.all %}
+                    <p class='text-xl underline'> {{ experience.title_experience }}: </p>
+                    <p><strong>Description:</strong> {{ experience.description_experience }}</p>
+                    <p><strong>Date:</strong> {{ experience.date_experience }}</p>
+                    <p><strong>Lieux:</strong> {{ experience.location_experience }}</p>
+                    {% if not forloop.last %}<br/>{% endif %}
+                  {% endfor %}
+                </div>
+              </div> 
+              <span class='w-full mx-4 h-2 bg-slate-50 rounded-md'></span>
+
+              <div class="info-field my-6  p-2 w-full">
+                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6">Formations:</h3>
+                <div class='px-4'>
+                  {% for formation in info.formations.all %}
+                    <p class='text-xl underline'> {{ formation.title_formation }}: </p>
+                    <p><strong>Titre:</strong> {{ formation.description_formation }}</p>
+                    <p><strong>Date:</strong> {{ formation.date_formation }}</p>
+                    <p><strong>Lieux:</strong> {{ formation.location_formation }}</p>
+                    {% if not forloop.last %}<br/>{% endif %}
+                  {% endfor %}
+                </div>
+              </div> 
             </div>  
-
           </div>
         {% endfor %}
       </div>
-    
-    
-    
     </section>
 
 </main>

@@ -1,38 +1,35 @@
-{% extends "base.html" %}
-{% load tailwind_filters %}
-{% load crispy_forms_tags %}
+{% extends "base.html" %} {% load tailwind_filters %} {% load crispy_forms_tags
+%} {% block content %}
 
-
-{% block content %}
-
-<header class="container mx-auto mb-6 flex flex-col justify-center items-center">
-    <h1 class="font-bold text-4xl mt-4">Navbar a faire</h1>
-    {% if user.is_authenticated %}
-        <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
-    {% endif %}
+<header class="container mx-auto m-6 flex flex-col justify-center items-center">
+  <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
+  {% if user.is_authenticated %}
+  <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
+  {% endif %}
 </header>
 
 <main class="container mx-auto p-10">
-        <div class="bg-gray-100 p-4 rounded-lg">
-            <h2 class="font-bold text-2xl">Voir les CV</h2>
-            <p class="mt-2">Consultez les CV de l'utilisateur</p>
-            <a href="{% url 'pages:liste_cv' %}" class="btn btn-primary mt-4">Voir les CV</a>
-        </div>
+  <div class="bg-gray-100 p-4 rounded-lg w-1/2">
+    <h2 class="font-bold text-2xl">Voir les CV</h2>
+    <p class="mt-2">Consultez les CV de l'utilisateur</p>
+    <a href="{% url 'pages:liste_cv' %}" class="btn btn-primary mt-4"
+      >Voir les CV</a
+    >
+  </div>
 
-        <section>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4'>Créer un CV</h1>
-                {% if form %}
-                    {{ form|crispy }}
-                {% else %}
-                    <p>Le formulaire n'est pas disponible.</p>
-                {% endif %}
-                <button type="submit" class="btn btn-primary">Enregistrer le CV</button>
-            </form>
-        </section>
-
+  <section>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h1
+        class="text-4xl font-semibold flex flex-row justify-center items-center py-4">
+        Créer un CV 
+      </h1>
+      {% if form %} {{ form|crispy }} {% else %}
+      <p>Le formulaire n'est pas disponible.</p>
+      {% endif %}
+      <button type="submit" class="btn btn-primary">Enregistrer le CV</button>
+    </form>
+  </section>
 </main>
-
 
 {% endblock content %}

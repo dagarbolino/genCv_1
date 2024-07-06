@@ -23,3 +23,8 @@ class InfoForm(forms.ModelForm):
         else:
             form = InfoForm()
         return render(request, 'create_cv.html', {'cv_form': form})
+    
+
+
+    
+   
