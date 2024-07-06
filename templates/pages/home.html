@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<header class="container mx-auto mb-6 flex flex-col justify-center items-center">
+    <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
+    {% if user.is_authenticated %}
+        <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
+    {% endif %}
+</header>
+
+<main class="container mx-auto p-10">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-gray-100 p-4 rounded-lg">
+            <h2 class="font-bold text-2xl">Créer un CV</h2>
+            <p class="mt-2">Créez votre CV en quelques clics</p>
+            <a href="{% url 'pages:create_cv' %}" class="btn btn-primary mt-4">Créer un CV</a>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg">
+            <h2 class="font-bold text-2xl">Voir les CV</h2>
+            <p class="mt-2">Consultez les CV des autres utilisateurs</p>
+            <a href="{% url 'pages:liste_cv' %}" class="btn btn-primary mt-4">Voir les CV</a>
+        </div>
+    </section>
+</main>
+
+{% endblock content %}
