@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<header class="container mx-auto m-6 flex flex-col justify-center items-center">
+    <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
+    {% if user.is_authenticated %}
+        <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
+    {% endif %}
+</header>
+
+<main class="container mx-auto p-10">
+
+
+    <section>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <h1
+                class="text-4xl font-semibold flex flex-row justify-center items-center py-4">
+                Ajouter un hobbie :
+            </h1>
+            {% if form %}
+            {{ form|crispy }}
+            {% else %}
+                <p>Le formulaire n'est pas disponible.</p>
+            {% endif %}
+            <button type="submit" class="btn btn-primary w-full">Enregistrer ce hobbie</button>
+        </form>
+    </section>
+
+</main>
+
+{% endblock %}    

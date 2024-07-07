@@ -1,11 +1,10 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404, render, redirect
-from django.views import View
 
-from curriculum.forms import InfoForm
+from curriculum.forms import InfoForm, HobbyForm
 
-from curriculum.models import Info
+from curriculum.models import Info, Hobby
 
 
 
@@ -13,8 +12,6 @@ def home(request):
     return render(request, "pages/home.html")
 
 
-
-        
 class InfoListView(ListView):
     model = Info
     template_name = "pages/list.html"
@@ -44,8 +41,6 @@ class InfoCreateView(CreateView):
     success_url = reverse_lazy('pages:home')
     
     
-
-
 class InfoDeleteView(DeleteView):
     model = Info
     template_name = "pages/delete_cv.html"
@@ -55,9 +50,7 @@ class InfoDeleteView(DeleteView):
         info = get_object_or_404(Info, pk=pk)
         return render(request, "pages/delete_cv.html", context={"info": info})
     
-    
-    
-    
+
 class InfoUpdateView(UpdateView):
     model = Info
     template_name = "update_cv.html"
@@ -75,3 +68,25 @@ class InfoUpdateView(UpdateView):
             context={"form": form},
         )
 
+class HobbiCreateView(CreateView):
+    model = Hobby
+    form_class = HobbyForm
+    template_name = 'pages/hobbie_create.html'
+    success_url = reverse_lazy('pages:home')
+    
+class HobbyUpdateView(UpdateView):
+    model = Hobby
+    template_name = "pages/hobbie_update.html"
+    form_class = HobbyForm
+
+    def get_success_url(self):
+        return reverse_lazy("pages:home")   
+    
+    def get(self, request, pk):
+        hobby = Hobby.objects.get(pk=pk)
+        form = HobbyForm(instance=hobby)
+        return render(
+            request,
+            "pages/hobbie_update.html",
+            context={"form": form},
+        )    
