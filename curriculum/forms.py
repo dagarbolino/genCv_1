@@ -1,8 +1,9 @@
 from django import forms
-from django.core.exceptions import ValidationError
-from django.shortcuts import redirect, render
-
+from django.shortcuts import redirect, render, get_object_or_404
 from curriculum.models import Info
+
+from django.views.decorators.http import require_POST
+
 
 
 class InfoForm(forms.ModelForm):
@@ -25,6 +26,14 @@ class InfoForm(forms.ModelForm):
         return render(request, 'create_cv.html', {'cv_form': form})
     
 
-
+    def update_cv_view(request, pk):
+        cv = Info.objects.get(pk=pk)
+        form = InfoForm(request.POST or None, instance=cv)
+        if form.is_valid():
+            form.save()
+            return redirect('pages:home')
+        return render(request, 'update_cv.html', {'cv_form': form})
     
-   
+    
+    
+    

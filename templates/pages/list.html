@@ -29,8 +29,9 @@
 
           <p class='w-full text-4xl font-semibold'>{{ info.title }}</p>
 
-          <a href="" class="btn btn-primary w-44 mx-4">Supprimer le CV</a>
-          <a href="" class="btn btn-primary w-44">Modifier le CV</a>
+          <a href="{% url 'pages:delete_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Supprimer le CV</a>
+          <a href="{% url 'pages:update_cv' info.pk %}" class="btn btn-primary w-44">Modifier le CV</a>
+
         </div>
           <div class='flex flex-row justify-start items-start w-full  border-2 p-4'>
 
