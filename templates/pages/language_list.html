@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class='w-full flex justify-end mt-[500px] fixed '>
+  <a 
+    class="btn btn-primary my-2 w-22 flex justify-end"
+    href="#" onclick="window.history.back(); return false;">
+    Retour
+  </a>
+</div>
+
+<header class="container mx-auto m-6 flex flex-col justify-center items-center">
+    <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
+    {% if user.is_authenticated %}
+        <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
+    {% endif %}
+</header>
+
+<main class="container mx-auto p-10">
+
+
+  <section class="flex flex-col w-full h-screen">
+    <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4'>Liste des langues et de leur niveau</h1>
+    <div class="container mx-auto flex flex-col">
+      {% for language in languages %}
+        <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10 border-2 rounded-md p-2'>
+          <p class='w-full text-2xl font-semibold'><stong>Langue: </stong>{{ language.title_language }}</p>
+          <p class='w-full text-2xl font-semibold'><stong>Niveau: </stong>{{ language.niveau_language }}</p>
+          <a href="{% url 'pages:language_delete' language.pk %}" class="btn btn-primary w-44 mr-6">Supprimer une langue</a>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  </main>
+
+
+
+{% endblock %}

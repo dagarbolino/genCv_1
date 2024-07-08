@@ -5,6 +5,14 @@
 
 {% block content %}
 
+
+<div class='w-full flex justify-end mt-[500px] fixed '>
+    <a class="btn btn-primary my-2 w-22 flex justify-end"
+        href="#" onclick="window.history.back(); return false;">
+        Retour
+    </a>
+</div>
+
 <header class="container mx-auto m-6 flex flex-col justify-center items-center">
     <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
     {% if user.is_authenticated %}
@@ -13,8 +21,6 @@
 </header>
 
 <main class="container mx-auto p-10">
-
-
     <section>
         <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -30,6 +36,7 @@
             <button type="submit" class="btn btn-primary w-full">Enregistrer ce hobbie</button>
         </form>
     </section>
+
 
 </main>
 

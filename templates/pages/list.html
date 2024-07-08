@@ -28,9 +28,9 @@
         <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10'>
 
           <p class='w-full text-4xl font-semibold'>{{ info.title }}</p>
-
-          <a href="{% url 'pages:delete_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Supprimer le CV</a>
-          <a href="{% url 'pages:update_cv' info.pk %}" class="btn btn-primary w-44">Modifier le CV</a>
+          <a href="{% url 'pages:detail_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Détail du CV</a>
+          <a href="{% url 'pages:update_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Modifier le CV</a>
+          <a href="{% url 'pages:delete_cv' info.pk %}" class="btn btn-primary w-44">Supprimer le CV</a>
 
         </div>
           <div class='flex flex-row justify-start items-start w-full  border-2 p-4'>
@@ -95,13 +95,13 @@
               <span class='w-full mx-4 h-2 bg-slate-50 rounded-md'></span>
 
               <div class="info-field my-6  p-2 w-full">
-                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6">Experiences:</h3>
+                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6">Experience</h3>
                 <div class='px-4'>
                   {% for experience in info.experiences.all %}
                     <p class='text-xl underline'> {{ experience.title_experience }}: </p>
                     <p><strong>Description:</strong> {{ experience.description_experience }}</p>
                     <p><strong>Date:</strong> {{ experience.date_experience }}</p>
-                    <p><strong>Lieux:</strong> {{ experience.location_experience }}</p>
+                    <p><strong>Lieu:</strong> {{ experience.location_experience }}</p>
                     {% if not forloop.last %}<br/>{% endif %}
                   {% endfor %}
                 </div>
@@ -109,13 +109,13 @@
               <span class='w-full mx-4 h-2 bg-slate-50 rounded-md'></span>
 
               <div class="info-field my-6  p-2 w-full">
-                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6">Formations:</h3>
+                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6">Formation</h3>
                 <div class='px-4'>
                   {% for formation in info.formations.all %}
                     <p class='text-xl underline'> {{ formation.title_formation }}: </p>
                     <p><strong>Titre:</strong> {{ formation.description_formation }}</p>
                     <p><strong>Date:</strong> {{ formation.date_formation }}</p>
-                    <p><strong>Lieux:</strong> {{ formation.location_formation }}</p>
+                    <p><strong>Lieu:</strong> {{ formation.location_formation }}</p>
                     {% if not forloop.last %}<br/>{% endif %}
                   {% endfor %}
                 </div>

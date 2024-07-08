@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class='w-full flex justify-end mt-[500px] fixed '>
+  <a 
+    class="btn btn-primary my-2 w-22 flex justify-end"
+    href="#" onclick="window.history.back(); return false;">
+    Retour
+  </a>
+</div>
+
+<header class="container mx-auto m-6 flex flex-col justify-center items-center">
+    <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
+    {% if user.is_authenticated %}
+        <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
+    {% endif %}
+</header>
+
+<main class="container mx-auto p-10">
+    <section class="flex flex-col w-full h-screen">
+      <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4'>Liste des formations</h1>
+      <div class="container mx-auto flex flex-col">
+        {% for formation in formations %}
+        <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10 border-2 rounded-md p-2'>
+          <div class='flex flex-col justify-center items-center w-full '>
+          <p class='w-full text-2xl font-semibold'>{{ formation.title_formation }}</p>
+          <p class='w-full text-xl'><strong>Description: </strong>{{formation.description_formation}}</p>
+          <p class='w-full text-xl'><strong>Date: </strong>{{formation.date_formation}}</p>
+          <p class='w-full text-xl'><strong>Lieu: </strong>{{formation.location_formation}}</p>
+        </div>
+          <a href="{% url 'pages:formation_delete' formation.pk %}" class="btn btn-primary w-44 mr-6">Supprimer une formation</a>
+          
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+</main>
+
+
+{% endblock %}

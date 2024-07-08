@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<header class="container mx-auto m-6 flex flex-col justify-center items-center">
+    <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
+    {% if user.is_authenticated %}
+        <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
+    {% endif %}
+</header>
+
+
+<div class="container mx-auto m-6 flex flex-col justify-center items-center">
+    <h2 class='text-2xl w-full flex justify-center items-center mt-10'>Êtes-vous sûr de vouloir supprimer cette formation ?</h2>
+    <form method="post">
+      {% csrf_token %}
+      <button 
+      class='text-2xl mt-10
+      bg-red-500 hover:bg-red-700 transition duration-400
+      text-white font-bold py-2 px-12 rounded-full'
+      type="submit" value="Supprimer">
+        Supprimer
+      </button>
+  </form>
+  <a href="{% url 'pages:liste_cv' %}" 
+    class='text-2xl mt-10 border-2 py-2 px-8 rounded-lg hover:bg-slate-100 hover:text-black transition duration-400'>
+    Retour à la liste des CV
+  </a>
+</div>  
+{% endblock %}
