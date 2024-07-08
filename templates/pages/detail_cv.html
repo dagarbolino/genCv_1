@@ -5,63 +5,45 @@
 
 {% block content %}
 
-<div class='w-full flex justify-end mt-[500px] fixed '>
+<div class='w-full flex justify-end gap-4 '>
+
   <a 
     class="btn btn-primary my-2 w-22 flex justify-end"
     href="#" onclick="window.history.back(); return false;">
     Retour
   </a>
+
 </div>
 
-<header class="container mx-auto m-6 flex flex-col justify-center items-center">
-    <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
-    {% if user.is_authenticated %}
-        <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
-    {% endif %}
-</header>
+  <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10'>
+    <p class='w-full text-4xl font-semibold'>{{ info.title }}</p>
+    <a href="{% url 'pages:delete_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Supprimer le CV</a>
+    <a href="{% url 'pages:update_cv' info.pk %}" class="btn btn-primary w-44">Modifier le CV</a>
+  </div>
 
-<main class="container mx-auto p-10">
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-gray-100 p-4 rounded-lg">
-            <h2 class="font-bold text-2xl">Créer un CV</h2>
-            <p class="mt-2">Créez votre CV en quelques clics</p>
-            <a href="{% url 'pages:create_cv' %}" class="btn btn-primary mt-4">Créer un CV</a>
-        </div>
-    </section>
 
-    <section class="flex flex-col w-full h-screen">
-      <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4'>Information des cv</h1>
-      <div class="container mx-auto flex flex-col">
-        
-        <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10'>
+<main class="container mx-auto ">
+    <section class="flex flex-col w-full">
+      <div class="container mx-auto flex flex-col bg-white">
 
-          <p class='w-full text-4xl font-semibold'>{{ info.title }}</p>
-
-          <a href="{% url 'pages:delete_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Supprimer le CV</a>
-          <a href="{% url 'pages:update_cv' info.pk %}" class="btn btn-primary w-44">Modifier le CV</a>
-
-        </div>
-          <div class='flex flex-row justify-start items-start w-full  border-2 p-4'>
-
-            
-            <div class='flex flex-col w-1/4  h-full'>
+        <div class='flex flex-row justify-start items-start w-full  border-2 p-4'>
+          <div class='flex flex-col w-1/4  h-full'>
+              <h3 class="flex justify-center font-bold text-6xl mt-2">{{ info.lastname }}</h3>
+              <h4 class="flex justify-center font-bold text-6xl mt-2">{{ info.firstname }}</h4>
+              <p class="text-xl my-10">type de contrat.....</p>
               <div class="flex justify-center items-center w-full my-2">
                 <img 
                 class='w-52 h-52 rounded-full border-2 border-gray-400 object-cover'
                 src="{{ info.photo.url }}" alt="Photo de {{ info.firstname }} {{ info.lastname }}">
               </div>
-              <div class="text-xl mt-2">{{ info.lastname }}</div>
-              <div class="text-xl mt-2">{{ info.firstname }}</div>
-              <div class="text-xl mt-2">{{ info.address }}</div>
-              <div class="text-xl mt-2">{{ info.zip_code }} - {{ info.city }}</div>
-              <div class="text-xl mt-2">{{ info.state }}</div>
-              <div class="text-xl mt-2"><strong>Téléphone:</strong> {{ info.phone }}</div>
-              <div class="text-xl mt-2"><strong>Email:</strong> {{ info.email }}</div>
+              <p class="text-4xl font-bold  my-10">Informations personnelles</p>
+              <p class="text-xl mt-2">{{ info.address }}</p>
+              <p class="text-xl mt-2">{{ info.zip_code }} - {{ info.city }}</p>
+              <p class="text-xl mt-2">{{ info.state }}</p>
+              <p class="text-xl mt-2"><strong>Téléphone:</strong> {{ info.phone }}</p>
+              <p class="text-xl mt-2"><strong>Email:</strong> {{ info.email }}</p>
               
               <div class="text-xl my-2"><strong>Née le </strong>....  à ....</div>
-
-              <span class='w-auto mt-10 mx-4 h-[2px] bg-slate-500 rounded-md'></span>
-
 
               <div class="info-field  text-xl mt-12  my-4">
                 <strong>Hobbies:</strong>
@@ -93,20 +75,18 @@
               </div>
             </div>
 
-
             <span class='w-[4px] mx-4 h-full bg-slate-50 rounded-md'></span>
 
             <div class="flex flex-col justify-start items-center w-3/4 h-full">
-              <div class=" border-2 border-slate-500 rounded-md  p-2 flex flex-col justify-start items-start w-full ">
-              
+              <div class=" border-2 border-slate-400 rounded-md  p-2 flex flex-col justify-start items-start w-full ">
                   <p class='px-4 my-4 text-lg'>{{ info.motivation }}</p>
               </div>
 
               
-        <div class="flex flex-col justify-evenly items-center h-full">
+              <div class="flex flex-col justify-evenly items-center h-full">
 
               <div class="my-6   w-full">
-                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6 border-2 border-slate-500 rounded-md">Experience</h3>
+                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6 border-2 border-slate-400 rounded-md font-bold ">Experience</h3>
                 <div class='px-4'>
                   {% for experience in info.experiences.all %}
 
@@ -128,7 +108,7 @@
               
 
               <div class=" my-6   w-full">
-                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6 border-2 border-slate-500 rounded-md">Formation</h3>
+                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6 border-2 border-slate-400 rounded-md font-bold ">Formation</h3>
                 <div class='px-4'>
                   {% for formation in info.formations.all %}
 
@@ -143,16 +123,16 @@
                   </div>
 
                 
-             
-               
+            
+              
                     {% if not forloop.last %}<br/>{% endif %}
                   {% endfor %}
                 </div>
               </div> 
-
-        </div>           
             </div>  
-          </div>
+          
+          </div>  
+        </div>
         
       </div>
     </section>

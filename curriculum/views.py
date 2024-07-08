@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+
 from .forms import InfoForm
+
+
 
 from curriculum.models import Info
 
@@ -22,3 +26,7 @@ def list_info(request):
     infos = Info.objects.all()
     context = {'infos': infos}
     return render(request, 'list_formation.html', context)
+
+
+
+

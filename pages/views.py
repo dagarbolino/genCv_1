@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.shortcuts import get_object_or_404, render, redirect
 
+
 from curriculum.forms import InfoForm, HobbyForm, SkillForm, LanguageForm, FormationForm, ExperienceForm
 
 from curriculum.models import Info, Hobby, Skill, Language, Formation, Experience
@@ -278,3 +279,6 @@ class ExperienceDeleteView(DeleteView):
     def get(self, request, pk):
         experience = get_object_or_404(Experience, pk=pk)
         return render(request, "pages/experience_delete.html", context={"experience": experience})            
+    
+    
+    

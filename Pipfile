@@ -10,6 +10,7 @@ django-extensions = "*"
 crispy-tailwind = "*"
 pillow = "*"
 django-crispy-forms = "*"
+xhtml2pdf = "*"
 
 [dev-packages]
 
