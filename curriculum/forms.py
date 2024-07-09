@@ -9,7 +9,7 @@ from django.views.decorators.http import require_POST
 class InfoForm(forms.ModelForm):
     class Meta:
         model = Info
-        fields = ("title", "lastname", "firstname", "email", "phone", "address", "city", "zip_code", "state", "motivation", "photo", 
+        fields = ("title", "lastname", "firstname", "type_of_Contract", "date_of_birth", "place_of_birth", "email", "phone", "address", "city", "zip_code", "state", "motivation", "photo", 
                 "hobbies", "formations", "experiences", "skills", "languages", "is_active")
 
     def create_cv_view(request):
@@ -118,7 +118,7 @@ class LanguageForm(forms.ModelForm):
 class FormationForm(forms.ModelForm):
     class Meta:
         model = Formation
-        fields = ("title_formation", "date_formation", "location_formation", "description_formation")
+        fields = ("title_formation", "business", "start_date_of_formation", "end_date_of_formation", "location_formation", "description_formation")
     
     def create_formation_view(request):
         if request.method == 'POST':
@@ -142,7 +142,7 @@ class FormationForm(forms.ModelForm):
 class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
-        fields = ("title_experience", "date_experience", "location_experience", "description_experience")
+        fields = ("title_experience", "description_experience", "business", "start_date_of_experience", "end_date_of_experience", "description_experience")
     
     def create_experience_view(request):
         if request.method == 'POST':

@@ -63,7 +63,7 @@ class InfoDetailView(View):
     
 def generate_pdf(request, pk):
     info = get_object_or_404(Info, pk=pk)
-    template = get_template("pages/detail_cv_pdf.html")  # Utilisez le nouveau template ici
+    template = get_template("pages/detail_cv_pdf.html")
     html = template.render({"info": info})
     options = {
         "page-size": "Letter",

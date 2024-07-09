@@ -9,6 +9,9 @@ class Info(models.Model):
     title = models.CharField("titre du curriculm", max_length=120)
     lastname = models.CharField("nom de la personne", max_length=120)
     firstname = models.CharField("prénom de la personne", max_length=120, blank=True, null=True)
+    type_of_Contract = models.CharField("type de contrat", max_length=120, blank=True, null=True)
+    date_of_birth = models.DateField("date de naissance de la personne", blank=True, null=True)
+    place_of_birth = models.CharField("lieu de naissance de la personne", max_length=120, blank=True, null=True)
     address = models.CharField("adresse de la personne", max_length=120, blank=True, null=True)
     city = models.CharField("ville", max_length=120, blank=True, null=True)
     state = models.CharField("état", max_length=120, blank=True, null=True)
@@ -52,7 +55,9 @@ class Hobby(models.Model):
 class Formation(models.Model):
     title_formation = models.CharField("titre de la formation", max_length=120)
     description_formation = models.TextField("description de la formation")
-    date_formation = models.CharField("date de la formation", max_length=50)
+    business = models.CharField("école ou entreprise", max_length=120, blank=True, null=True)
+    start_date_of_formation = models.DateField("date de début de la formation", blank=True, null=True)   
+    end_date_of_formation = models.DateField("date de fin de la formation", blank=True, null=True)
     location_formation = models.CharField("lieu de la formation", max_length=100)
     info = models.ForeignKey(Info, on_delete=models.CASCADE, related_name='formations_info', null=True)
         
@@ -68,7 +73,9 @@ class Formation(models.Model):
 class Experience(models.Model):
     title_experience = models.CharField("titre de la l'expérience", max_length=120)
     description_experience = models.TextField("description de l'expérience")
-    date_experience = models.CharField("date de l'expérience", max_length=50)
+    business = models.CharField("école ou entreprise", max_length=120, blank=True, null=True)
+    start_date_of_experience = models.DateField("date de début de l'expérience", blank=True, null=True)
+    end_date_of_experience = models.DateField("date de fin de l'expérience", blank=True, null=True)
     location_experience = models.CharField("lieu de l'expérience", max_length=100)
     info = models.ForeignKey(Info, on_delete=models.CASCADE, related_name='experience_info', null=True)
 
@@ -96,9 +103,9 @@ class Skill(models.Model):
 class Language(models.Model):
     title_language = models.CharField("titre de la langue", max_length=120)
     niveau_choices = [
-        ('debutant', 'debutant'),
-        ('intermediaire', 'intermediaire'),
-        ('avance', 'avance'),
+        ('Débutant', 'Débutant'),
+        ('Intermédiaire', 'Intermédiaire'),
+        ('Avancé', 'Avancé'),
     ]
     niveau_language = models.CharField("niveau de la langue choisie", max_length=120, choices=niveau_choices)
     info = models.ForeignKey(Info, on_delete=models.CASCADE, related_name='language_info', null=True)
@@ -111,4 +118,3 @@ class Language(models.Model):
         verbose_name_plural = "Languages"  
 
 
-      

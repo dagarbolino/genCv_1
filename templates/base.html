@@ -15,11 +15,11 @@
     <title>GEN.cv | home</title>
 </head>
     {% block title %}<title>GEN.cv | home</title>{% endblock %}
-<body class='flex flex-col justify-center items-center min-h-screen m-0 max-w-[1024px]'>
+    <body class='flex flex-col justify-center items-center min-h-screen m-0 p-0 max-w-[1024px] mx-auto'>
     {% block navigation %}
     <nav class="bg-primary p-4 text-white w-full">
         <div class='container mx-auto flex justify-between'>
-            <a class='text-2xl' href="{% url 'pages:home' %}">Hello</a>
+            <a class='text-2xl' href="{% url 'pages:home' %}">GEN.cv</a>
             <div class='flex space-x-4 text-lg'>
                 {% if not user.is_authenticated %}
                     <a href="{% url 'users:login' %}">Se connecter</a>
@@ -40,8 +40,8 @@
     </div>
 
     {% block footer %}
-        <footer class="bg-primary p-4 text-white w-full h-auto mt-6 flex flex-row justify-end items-end">
-            <div class='container mx-auto flex justify-between'>
+        <footer class="bg-primary p-4 text-white w-full h-auto mt-6 flex flex-row justify-center items-center">
+            <div class='container mx-auto flex justify-start items-center'>
                 <p>© 2021 GEN.cv</p>
             </div>
         </footer>

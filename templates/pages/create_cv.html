@@ -1,5 +1,9 @@
-{% extends "base.html" %} {% load tailwind_filters %} {% load crispy_forms_tags
-%} {% block content %}
+{% extends "base.html" %} 
+{% load tailwind_filters %} 
+{% load crispy_forms_tags %} 
+
+
+{% block content %}
 
 <div class='w-full flex justify-end mt-[500px] fixed '>
   <a 
@@ -12,7 +16,7 @@
 <header class="container mx-auto m-6 flex flex-col justify-center items-center">
   <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
   {% if user.is_authenticated %}
-  <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
+      <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
   {% endif %}
 </header>
 
@@ -20,16 +24,17 @@
   <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
     <div class="bg-gray-100 p-4 rounded-lg">
-    <h2 class="font-bold text-2xl">Voir les CV</h2>
-    <p class="mt-2">Consultez les CV de l'utilisateur</p>
-    <a href="{% url 'pages:liste_cv' %}" class="btn btn-primary mt-4"
-      >Voir les CV</a>
-  </div>
-</div>
+      <h2 class="font-bold text-2xl">Voir les CV</h2>
+      <p class="mt-2">Consultez les CV de l'utilisateur</p>
+      <a href="{% url 'pages:liste_cv' %}" class="btn btn-primary mt-4"
+        >Voir les CV
+      </a>
+    </div>
+
 <div class="bg-gray-100 p-4 rounded-lg">
   <h2 class="font-bold text-2xl">Ajouter un élément</h2>
   <label for="option-select"></label>
-  <select name="options" id="option-select" onchange="location = this.value;">
+  <select class="rounded-md" name="options" id="option-select" onchange="location = this.value;">
     <option value="">--Choisissez un élément--</option>
     <option value="{% url 'pages:hobbie_create' %}">Un hobbie</option>
     <option value="{% url 'pages:skill_create' %}">Une compétence</option>
@@ -39,7 +44,7 @@
   </select>
   <h2 class="font-bold text-2xl">Liste des éléments</h2>
   <label for="option-select"></label>
-  <select name="options" id="option-select" onchange="location = this.value;">
+  <select class="rounded-md" name="options" id="option-select" onchange="location = this.value;">
     <option value="">--Choisissez une liste d'élément--</option>
     <option value="{% url 'pages:hobbie_list' %}">Liste des hobbies</option>
     <option value="{% url 'pages:skill_list' %}">Liste des skills</option>

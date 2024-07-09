@@ -5,9 +5,9 @@
 
 {% block content %}
 
-  <div class='w-full flex justify-end mb-[50px] fixed '>
+  <div class='w-full flex justify-end mb-[50px] '>
     <a 
-      class="btn btn-primary my-2 w-22 flex justify-end"
+      class="btn btn-primary my-2 w-22 flex justify-end mr-1 "
       href="#" onclick="window.history.back(); return false;">
       Retour
     </a>
@@ -19,28 +19,36 @@
   </div>
 
 
-<main class="container mx-auto ">
+  <main class="container mx-auto ">
     <section class="flex flex-col w-full">
       <div class="container mx-auto flex flex-col bg-white">
 
-        <div class='flex flex-row justify-start items-start w-full  border-2 p-4'>
+        <div class='flex flex-row justify-start items-start w-full p-4 gap-11'>
           <div class='flex flex-col w-1/4  h-full'>
-              <h3 class="flex justify-center font-bold text-6xl mt-2">{{ info.lastname }}</h3>
-              <h4 class="flex justify-center font-bold text-6xl mt-2">{{ info.firstname }}</h4>
-              <p class="text-xl my-10">type de contrat.....</p>
+              <h3 class="flex justify-center font-bold text-4xl mt-2">{{ info.lastname }}</h3>
+              <h4 class="flex justify-center font-bold text-4xl mt-2">{{ info.firstname }}</h4>
+
+
+              <h4 class="text-xl my-10 ">{{ info.type_of_Contract }}</h4>
+
+
+
+
               <div class="flex justify-center items-center w-full my-2">
                 <img 
                 class='w-52 h-52 rounded-full border-2 border-gray-400 object-cover'
                 src="{{ info.photo.url }}" alt="Photo de {{ info.firstname }} {{ info.lastname }}">
               </div>
-              <p class="text-4xl font-bold  my-10">Informations personnelles</p>
-              <p class="text-xl mt-2">{{ info.address }}</p>
-              <p class="text-xl mt-2">{{ info.zip_code }} - {{ info.city }}</p>
-              <p class="text-xl mt-2">{{ info.state }}</p>
-              <p class="text-xl mt-2"><strong>Téléphone:</strong> {{ info.phone }}</p>
-              <p class="text-xl mt-2"><strong>Email:</strong> {{ info.email }}</p>
+              <p class="text-2xl font-bold  mt-10 mb-4">Informations personnelles</p>
+              <p class='info-field  text-xl  mt-4'><strong>Adresse:</strong></p>
+              <p class="text-lg mt-2">{{ info.address }}</p>
+              <p class="text-lg mt-2">{{ info.zip_code }} - {{ info.city }}</p>
+              <p class="text-lg mt-2">{{ info.state }}</p>
+              <p class="text-lg mt-2"><strong>Téléphone:</strong> {{ info.phone }}</p>
+              <p class="text-lg mt-2"><strong>Email:</strong> {{ info.email }}</p>
               
-              <div class="text-xl my-2"><strong>Née le </strong>....  à ....</div>
+              <div class="info-field mt-2 text-md"><strong>Née le: </strong>{{ info.date_of_birth }} </div>
+              <div class="info-field mt-2 text-md"><strong>Lieux : </strong> {{ info.place_of_birth }} </div>
 
               <div class="info-field  text-xl mt-12  my-4">
                 <strong>Hobbies:</strong>
@@ -72,7 +80,9 @@
               </div>
             </div>
 
-            <span class='w-[4px] mx-4 h-full bg-slate-50 rounded-md'></span>
+
+
+
 
             <div class="flex flex-col justify-start items-center w-3/4 h-full">
               <div class=" border-2 border-slate-400 rounded-md  p-2 flex flex-col justify-start items-start w-full ">
@@ -83,21 +93,25 @@
               <div class="flex flex-col justify-evenly items-center h-full">
 
               <div class="my-6   w-full">
-                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6 border-2 border-slate-400 rounded-md font-bold ">Experience</h3>
+                <h3 class="w-full flex flex-row justify-center items-center text-3xl mb-6 font-bold ">Experience</h3>
                 <div class='px-4'>
                   {% for experience in info.experiences.all %}
+                    <p class='flex justify-start w-full text-xl border-b-4 mb-4'> {{ experience.title_experience }}: </p>
 
-                    <p class='mb-2'>
-                      <span class='mr-4 text-lg'>{{ experience.date_experience }}</span>
-                      <span class=' text-2xl underline'>{{ experience.title_experience }}:</span>
-                    </p>
+                    <div class='flex flex-row justify-start items-start w-full '>
+                    
+                      <div class='text-lg w-auto flex flex-col justify-start items-start'>
+                          <p class='text-sm w-auto mr-6'> {{ experience.start_date_of_experience|date:"d/m/Y" }}</p>
+                          <p class='text-sm w-auto mr-6'> {{ experience.end_date_of_experience|date:"d/m/Y" }}</p>
+                      </div>
 
-                    <div class='ml-24'>
-                      <p class='text-lg'><span class='mr-4'>Description:</span> {{ experience.description_experience }}</p>
-                      <p class='text-lg'><span class='mr-4'>Entreprise:</span> ..............</p>
-                      <p class='text-lg'><span class='mr-4'>Ville:</span> {{ experience.location_experience }}</p>
+                      <div class='text-lg w-auto flex flex-col justify-start items-start'>
+                          <p class='font-bold'>{{ experience.description_experience }}</p>
+                          <p>Entreprise: {{ experience.business }} à {{ experience.location_experience }}</p>
+                      </div>
+
                     </div>
-
+                    
                     {% if not forloop.last %}<br/>{% endif %}
                   {% endfor %}
                 </div>
@@ -105,20 +119,24 @@
               
 
               <div class=" my-6   w-full">
-                <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6 border-2 border-slate-400 rounded-md font-bold ">Formation</h3>
+                <h3 class="w-full flex flex-row justify-center items-center text-3xl mb-6  font-bold ">Formation</h3>
                 <div class='px-4'>
                   {% for formation in info.formations.all %}
+                  <p class='flex justify-start w-full text-xl border-b-4 mb-4'> {{ formation.title_formation }}: </p>
+                  <div class='flex flex-row justify-start items-start w-full '>
 
-                  <p class='mb-2'>
-                    <span class='mr-4 text-lg'>{{  formation.date_formation }}</span>
-                    <span class=' text-2xl underline'>{{ formation.title_formation }}:</span>
-                  </p>
-                  <div class='ml-24'>
-                    <p class='text-lg'><span class='mr-4'>Description:</span> {{ formation.description_formation }}</p>
-                    <p class='text-lg'><span class='mr-4'>Entreprise:</span> ..............</p>
-                    <p class='text-lg'><span class='mr-4'>Ville:</span> {{ formation.location_formation}}</p>
+                    <div class='text-lg w-auto flex flex-col justify-start items-start'>
+                        <h class='text-sm w-auto mr-6'> {{ formation.start_date_of_formation|date:"d/m/Y" }}</h>
+                        <h class='text-sm w-auto mr-6'> {{ formation.end_date_of_formation|date:"d/m/Y" }}</h>
+                    </div>
+                  
+                    <div class='text-lg w-auto flex flex-col justify-start items-start'>
+                        <p>{{ formation.description_formation }}</p>
+                        <p>Entreprise: {{ formation.business }} à {{ formation.location_formation }}</p>
+
+                    </div>
+                  
                   </div>
-
                     {% if not forloop.last %}<br/>{% endif %}
                   {% endfor %}
                 </div>
