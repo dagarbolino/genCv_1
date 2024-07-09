@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_tailwind",
     "django_browser_reload",
+    "django_vite",
 
 ]
 
@@ -129,7 +130,18 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+    BASE_DIR / "frontend" / "dist",
 ]
+
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": DEBUG,
+    },
+}
+
+
+
+
 # Chemin d'accès pour les fichiers médias en mode développement
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

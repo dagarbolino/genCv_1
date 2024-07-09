@@ -1,0 +1,16 @@
+{
+  "src/application/app.js": {
+    "file": "assets/app-CYlpPAq2.js",
+    "name": "frontend/src/application/app.js",
+    "src": "src/application/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-BoU1shTb.css"
+    ]
+  },
+  "src/styles/app.css": {
+    "file": "assets/app-BoU1shTb.css",
+    "src": "src/styles/app.css",
+    "isEntry": true
+  }
+}

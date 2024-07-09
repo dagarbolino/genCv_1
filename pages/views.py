@@ -1,6 +1,10 @@
+from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
 from django.shortcuts import get_object_or_404, render, redirect
+import pdfkit
+
+from django.template.loader import get_template
 
 
 from curriculum.forms import InfoForm, HobbyForm, SkillForm, LanguageForm, FormationForm, ExperienceForm
@@ -42,8 +46,12 @@ class InfoCreateView(CreateView):
     form_class = InfoForm
     template_name = 'pages/create_cv.html'
     success_url = reverse_lazy('pages:home')
-    
-class InfoDetailView(DetailView):
+
+
+
+
+
+class InfoDetailView(View):
     model = Info
     template_name = "pages/detail_cv.html"
     
@@ -53,7 +61,19 @@ class InfoDetailView(DetailView):
         return render(request, "pages/detail_cv.html", context={"info": info})
     
     
-
+def generate_pdf(request, pk):
+    info = get_object_or_404(Info, pk=pk)
+    template = get_template("pages/detail_cv_pdf.html")  # Utilisez le nouveau template ici
+    html = template.render({"info": info})
+    options = {
+        "page-size": "Letter",
+        "encoding": "UTF-8",
+        "enable-local-file-access": ""
+    }
+    pdf = pdfkit.from_string(html, False, options)
+    response = HttpResponse(pdf, content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="cv.pdf"'
+    return response
     
     
 

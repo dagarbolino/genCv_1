@@ -1,7 +1,7 @@
 from django.urls import path
 
 
-from .views import InfoListView, InfoCreateView, home, InfoUpdateView, InfoDetailView, InfoDeleteView, HobbiCreateView, SkillCreateView, SkillListView, LanguageCreateView, FormationCreateView, ExperienceCreateView, ExperienceListView, ExperienceDeleteView, SkillDeleteView, FormationListView, FormationDeleteView, LanguageListView, LanguageDeleteView, HobbiListView, HobbyDeleteView
+from .views import InfoListView, InfoCreateView, home, generate_pdf, InfoUpdateView, InfoDetailView, InfoDeleteView, HobbiCreateView, SkillCreateView, SkillListView, LanguageCreateView, FormationCreateView, ExperienceCreateView, ExperienceListView, ExperienceDeleteView, SkillDeleteView, FormationListView, FormationDeleteView, LanguageListView, LanguageDeleteView, HobbiListView, HobbyDeleteView
 app_name = "pages"
 
 urlpatterns = [
@@ -37,7 +37,7 @@ urlpatterns = [
     path('experience_delete/<int:pk>/', ExperienceDeleteView.as_view(), name='experience_delete'),
     
     
-
+    path('curriculum-pdf/<int:pk>/', generate_pdf, name='curriculum_pdf'),
 
 
 ]

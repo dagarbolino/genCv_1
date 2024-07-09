@@ -5,20 +5,17 @@
 
 {% block content %}
 
-<div class='w-full flex justify-end gap-4 '>
+  <div class='w-full flex justify-end mb-[50px] fixed '>
+    <a 
+      class="btn btn-primary my-2 w-22 flex justify-end"
+      href="#" onclick="window.history.back(); return false;">
+      Retour
+    </a>
+  </div>
 
-  <a 
-    class="btn btn-primary my-2 w-22 flex justify-end"
-    href="#" onclick="window.history.back(); return false;">
-    Retour
-  </a>
-
-</div>
 
   <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10'>
-    <p class='w-full text-4xl font-semibold'>{{ info.title }}</p>
-    <a href="{% url 'pages:delete_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Supprimer le CV</a>
-    <a href="{% url 'pages:update_cv' info.pk %}" class="btn btn-primary w-44">Modifier le CV</a>
+    <a href="{% url 'pages:curriculum_pdf' pk=info.pk %}" class="btn btn-primary w-44">Download</a>
   </div>
 
 
@@ -122,9 +119,6 @@
                     <p class='text-lg'><span class='mr-4'>Ville:</span> {{ formation.location_formation}}</p>
                   </div>
 
-                
-            
-              
                     {% if not forloop.last %}<br/>{% endif %}
                   {% endfor %}
                 </div>

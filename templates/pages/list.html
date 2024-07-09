@@ -5,6 +5,14 @@
 
 {% block content %}
 
+<div class='w-full flex justify-end mt-[500px] fixed '>
+  <a 
+    class="btn btn-primary my-2 w-22 flex justify-end"
+    href="#" onclick="window.history.back(); return false;">
+    Retour
+  </a>
+</div>
+
 <header class="container mx-auto m-6 flex flex-col justify-center items-center">
     <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
     {% if user.is_authenticated %}
@@ -21,13 +29,13 @@
         </div>
     </section>
 
-    <section class="flex flex-col w-full h-screen">
+    <section class="flex flex-col w-full h-full">
       <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4'>Information des cv</h1>
       <div class="container mx-auto flex flex-col">
         {% for info in infos %}
         <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10'>
 
-          <p class='w-full text-4xl font-semibold'>{{ info.title }}</p>
+          <a href="{% url 'pages:detail_cv' info.pk %}" class='w-full text-4xl font-semibold'>{{ info.title }}</a>
           <a href="{% url 'pages:detail_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Détail du CV</a>
           <a href="{% url 'pages:update_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Modifier le CV</a>
           <a href="{% url 'pages:delete_cv' info.pk %}" class="btn btn-primary w-44">Supprimer le CV</a>
