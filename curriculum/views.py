@@ -1,14 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-
+from django.contrib.auth.decorators import login_required
 from .forms import InfoForm
-
-
-
 from curriculum.models import Info
 
+@login_required
 def add_info(request, info_id):
-    info = Info.objects.get(id=info_id)
+
+    info = get_object_or_404(Info, id=info_id, user=request.user)
     formset = InfoForm(instance=info)
 
     if request.method == 'POST':
@@ -20,13 +19,12 @@ def add_info(request, info_id):
     context = {'formset': formset}
     return render(request, 'add_formation.html', context)
 
+@login_required
+def view_info(request, info_id):
+    info = get_object_or_404(Info, id=info_id, user=request.user)
 
-
-def list_info(request):
-    infos = Info.objects.all()
-    context = {'infos': infos}
-    return render(request, 'list_formation.html', context)
-
+    context = {'info': info}
+    return render(request, 'view_formation.html', context)
 
 
 

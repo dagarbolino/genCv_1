@@ -1,8 +1,10 @@
 from django.db import models
 
+
+
 from config import settings
 
-
+USER = settings.AUTH_USER_MODEL
 
 
 class Info(models.Model):
@@ -30,6 +32,11 @@ class Info(models.Model):
     experiences = models.ManyToManyField(to="Experience", related_name="experiences", blank=True)  
     skills = models.ManyToManyField(to="Skill", related_name="skills", blank=True)  
     languages = models.ManyToManyField(to="Language", related_name="languages", blank=True)  
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='users')
+    
+    
+
 
     def __str__(self):
         return self.title

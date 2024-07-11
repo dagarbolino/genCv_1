@@ -9,9 +9,7 @@
 
 <header class="container mx-auto m-6 flex flex-col justify-center items-center">
     <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
-    {% if user.is_authenticated %}
-        <h2 class="font-bold text-2xl mt-2">{{ user.username }} est authentifié</h2>
-    {% endif %}
+
 <div class='w-full flex justify-end '>
   <a 
     class="btn btn-primary my-2 w-22 flex justify-end mr-1 "
@@ -24,16 +22,15 @@
 
 <main class="container mx-auto p-10">
   <section class="w-full flex flex-row justify-between gap-4">
-        <div class="bg-gray-100 p-4 rounded-lg w-96 flex flex-col">
+        <div class="bg-gray-100 p-4 rounded-lg flex flex-col">
             <h2 class="font-bold text-2xl">Créer un CV</h2>
             <p class="mt-2">Créez votre CV en quelques clics</p>
             <a href="{% url 'pages:create_cv' %}" class="btn btn-primary mt-4 w-36">Créer un CV</a>
         </div>
-        
     </section>
 
     <section class="flex flex-col w-full h-full">
-      <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4'>Information des cv</h1>
+      <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4'>Liste des curriculums</h1>
       <div class="container mx-auto flex flex-col">
         {% for info in infos %}
         <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10'>

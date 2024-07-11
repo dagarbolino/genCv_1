@@ -1,11 +1,12 @@
 from django.urls import path
 
 
-from .views import InfoListView, InfoCreateView, home, generate_pdf, InfoUpdateView, InfoDetailView, InfoDeleteView, HobbiCreateView, SkillCreateView, SkillListView, LanguageCreateView, FormationCreateView, ExperienceCreateView, ExperienceListView, ExperienceDeleteView, SkillDeleteView, FormationListView, FormationDeleteView, LanguageListView, LanguageDeleteView, HobbiListView, HobbyDeleteView
+from .views import dashboard, InfoListView, InfoCreateView, home, generate_pdf, InfoUpdateView, InfoDetailView, InfoDeleteView, HobbiCreateView, SkillCreateView, SkillListView, LanguageCreateView, FormationCreateView, ExperienceCreateView, ExperienceListView, ExperienceDeleteView, SkillDeleteView, FormationListView, FormationDeleteView, LanguageListView, LanguageDeleteView, HobbiListView, HobbyDeleteView
 app_name = "pages"
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', dashboard, name='dashboard'),
+    path('home/', home, name='home'),
     path('liste_cv/', InfoListView.as_view(), name='liste_cv'),
     path('create_cv/', InfoCreateView.as_view(), name='create_cv'),
     path('delete_cv/<int:pk>/', InfoDeleteView.as_view(), name='delete_cv'),  

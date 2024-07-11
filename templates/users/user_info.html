@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<section class='w-full flex flex-col justify-center items-center '>
+<div class='w-full flex flex-col justify-end items-end '>
+  <a 
+    class="btn btn-primary my-2 w-22 flex justify-end mr-1 "
+    href="#" onclick="window.history.back(); return false;">
+    Retour
+  </a>
+</div>
+
+
+<div class="w-full flex flex-col text-black bg-gray-100 rounded-md p-4 ">
+    <h2 class='mt-6 p-4 text-3xl underline'>Informations de l'utilisateur :</h2>
+    <p class='px-4'>Nom d'utilisateur : {{ request.user.username }}</p>
+    <p class='px-4'>Email : {{ request.user.email }}</p>
+
+
+    <h3 class='mt-6 p-4 text-2xl'>Informations sur les curriculums créé</h3>
+    {% if data %}
+        <ul class='p-4 border-2 rounded-md'>
+            {% for info in data %}
+                <li class='text-xl underline'>{{ info.title }}:</li>
+                <li class=''>Nom: {{ info.lastname }}</li>
+                <li class=''>Prénom: {{ info.firstname }}</li>
+                <li class=''>Créé: {{ info.created_at }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class=''>Aucune information supplémentaire disponible.</p>
+    {% endif %}
+</div>
+</section>
+{% endblock %}

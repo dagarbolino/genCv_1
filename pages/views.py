@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
 from django.shortcuts import get_object_or_404, render, redirect
 import pdfkit
@@ -12,44 +14,36 @@ from curriculum.forms import InfoForm, HobbyForm, SkillForm, LanguageForm, Forma
 from curriculum.models import Info, Hobby, Skill, Language, Formation, Experience
 
 
+def dashboard(request):
+    return render(request, "pages/dashboard.html")
+
 
 def home(request):
     return render(request, "pages/home.html")
 
 
-class InfoListView(ListView):
+class InfoListView(LoginRequiredMixin, ListView):
     model = Info
     template_name = "pages/list.html"
-    #template_name = "pages/detail_cv.html"
-    
     context_object_name = "infos"
     
     def get_queryset(self):
-        return Info.objects.all()
+        return Info.objects.filter(user=self.request.user)
 
-    def infoView(request):
-        if request.method == "POST":
-            form = InfoForm(request.POST)
-            if form.is_valid():
-                ...  # traiter
-                return redirect("pages:home")
-        else:
-            form = InfoForm()
-        return render(
-            request,
-            "pages/home.html",
-            context={"form": form},
-        )
+def infoView(request):
+    if request.method == "POST":
+        form = InfoForm(request.POST)
+        if form.is_valid():
+            return redirect("pages:home")
+    else:
+        form = InfoForm()
+    return render(request, "pages/home.html", context={"form": form})
     
 class InfoCreateView(CreateView):
     model = Info
     form_class = InfoForm
     template_name = 'pages/create_cv.html'
     success_url = reverse_lazy('pages:home')
-
-
-
-
 
 class InfoDetailView(View):
     model = Info
@@ -60,25 +54,6 @@ class InfoDetailView(View):
         info = get_object_or_404(Info, pk=pk)
         return render(request, "pages/detail_cv.html", context={"info": info})
     
-    
-def generate_pdf(request, pk):
-    info = get_object_or_404(Info, pk=pk)
-    template = get_template("pages/detail_cv_pdf.html")
-    html = template.render({"info": info})
-    options = {
-        "page-size": "Letter",
-        "encoding": "UTF-8",
-        "enable-local-file-access": ""
-    }
-    pdf = pdfkit.from_string(html, False, options)
-    response = HttpResponse(pdf, content_type="application/pdf")
-    response["Content-Disposition"] = 'attachment; filename="cv.pdf"'
-    return response
-    
-    
-
-    
-    
 class InfoDeleteView(DeleteView):
     model = Info
     template_name = "pages/delete_cv.html"
@@ -88,7 +63,6 @@ class InfoDeleteView(DeleteView):
         info = get_object_or_404(Info, pk=pk)
         return render(request, "pages/delete_cv.html", context={"info": info})
     
-
 class InfoUpdateView(UpdateView):
     model = Info
     template_name = "update_cv.html"
@@ -105,6 +79,8 @@ class InfoUpdateView(UpdateView):
             "pages/update_cv.html",
             context={"form": form},
         )
+
+
 
 class HobbiCreateView(CreateView):
     model = Hobby
@@ -145,7 +121,6 @@ class HobbyDeleteView(DeleteView):
     
 
 
-        
 class SkillCreateView(CreateView):
     model = Skill
     form_class = SkillForm
@@ -182,6 +157,7 @@ class SkillDeleteView(DeleteView):
     def get(self, request, pk):
         skill = get_object_or_404(Skill, pk=pk)
         return render(request, "pages/skill_delete.html", context={"skill": skill})
+
 
         
 class LanguageCreateView(CreateView):
@@ -223,7 +199,6 @@ class LanguageDeleteView(DeleteView):
     
             
         
-        
 class FormationCreateView(CreateView):
     model = Formation
     form_class = FormationForm
@@ -251,7 +226,6 @@ class FormationListView(ListView):
             "pages/home.html",
             context={"form": form},
         )   
-        
         
 class FormationDeleteView(DeleteView):
     model = Formation
@@ -300,5 +274,19 @@ class ExperienceDeleteView(DeleteView):
         experience = get_object_or_404(Experience, pk=pk)
         return render(request, "pages/experience_delete.html", context={"experience": experience})            
     
-    
+
+
+def generate_pdf(request, pk):
+    info = get_object_or_404(Info, pk=pk)
+    template = get_template("pages/detail_cv_pdf.html")
+    html = template.render({"info": info})
+    options = {
+        "page-size": "Letter",
+        "encoding": "UTF-8",
+        "enable-local-file-access": ""
+    }
+    pdf = pdfkit.from_string(html, False, options)
+    response = HttpResponse(pdf, content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="cv.pdf"'
+    return response
     

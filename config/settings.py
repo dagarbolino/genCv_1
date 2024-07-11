@@ -57,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -159,3 +160,5 @@ CRISPY_TEMPLATE_PACK = "tailwind"
 # Config of the custom user and authentication
 AUTH_USER_MODEL = "users.User"
 LOGIN_URL = "users:login"
+LOGIN_REDIRECT_URL = "pages:home"
+LOGOUT_REDIRECT_URL = "pages:dashboard"
