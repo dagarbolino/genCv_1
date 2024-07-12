@@ -12,6 +12,7 @@ pillow = "*"
 django-crispy-forms = "*"
 pdfkit = "*"
 django-vite = "*"
+python-decouple = "*"
 
 [dev-packages]
 
