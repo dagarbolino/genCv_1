@@ -6,9 +6,7 @@
 {% block content %}
 
 
-
 <header class="container mx-auto m-6 flex flex-col justify-center items-center">
-    <h1 class="font-bold text-4xl mt-4">Bienvenue sur GEN.CV</h1>
 
 <div class='w-full flex justify-end '>
   <a 
@@ -30,16 +28,18 @@
     </section>
 
     <section class="flex flex-col w-full h-full">
-      <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4'>Liste des curriculums</h1>
+      <h1 class='text-4xl font-semibold flex flex-row justify-center items-center py-4 border-2 rounded-md mt-6'>Liste des curriculums</h1>
       <div class="container mx-auto flex flex-col">
         {% for info in infos %}
-        <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10'>
-
-          <a href="{% url 'pages:detail_cv' info.pk %}" class='w-full text-4xl font-semibold'>{{ info.title }}</a>
-          <a href="{% url 'pages:detail_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Détail du CV</a>
-          <a href="{% url 'pages:update_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Modifier le CV</a>
-          <a href="{% url 'pages:delete_cv' info.pk %}" class="btn btn-primary w-44">Supprimer le CV</a>
-
+        <div class='flex flex-col justify-center items-center w-full h-auto py-6 mx-10'>
+          <div class='mb-6'>
+            <a href="{% url 'pages:detail_cv' info.pk %}" class='w-full text-4xl font-semibold'>{{ info.title }}</a>
+          </div>  
+          <div>
+            <a href="{% url 'pages:detail_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Détail du CV</a>
+            <a href="{% url 'pages:update_cv' info.pk %}" class="btn btn-primary w-44 mr-6">Modifier le CV</a>
+            <a href="{% url 'pages:delete_cv' info.pk %}" class="btn btn-primary w-44">Supprimer le CV</a>
+        </div>
         </div>
           <div class='flex flex-row justify-start items-start w-full bg-white border-2 p-4 gap-11'>
 
@@ -55,9 +55,6 @@
                 class='w-52 h-52 rounded-full border-2 border-gray-400 object-cover'
                 src="{{ info.photo.url }}" alt="Photo de {{ info.firstname }} {{ info.lastname }}">
               </div>
-
-              
-
 
               <div class="info-field mt-2 text-md"><strong>Adresse:</strong> {{ info.address }}</div>
               <div class="info-field mt-2 text-md"><strong>Ville:</strong> {{ info.city }}</div>
@@ -98,16 +95,11 @@
               </div>
             </div>
 
-
-          
-
             <div class="flex flex-col justify-start items-center w-3/4 h-full">
               <div class=" border-2 rounded-md my-6 p-2 flex flex-col w-full md:min-h-36">
               
                   <p class='px-4 my-6'>{{ info.motivation }}</p>
               </div>
-
-              
 
               <div class="info-field my-6  p-2 w-full">
                 <h3 class="w-full flex flex-row justify-center items-center text-4xl mb-6">Experience</h3>
@@ -166,14 +158,6 @@
     </section>
 
 </main>
-
-
-
-
-
-
-
-
 
 
 {% endblock %}

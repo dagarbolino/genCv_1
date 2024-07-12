@@ -13,23 +13,61 @@
     </a>
   </div>
 
-  <div class='flex'>
-    <div class='flex flex-row justify-center items-center w-full h-auto px-6 my-10'>
-      <a href="{% url 'pages:detail_cv_pdf' pk=info.pk %}" class="btn btn-primary w-44">Download </a>
+  <div class=' p-6 flex flex-row justify-center items-center gap-4'>
+
+    <div class='w-auto h-auto flex flex-col justify-center items-center gap-4'>
+      <div class='w-44  border-2 rounded-md  '>
+        <img 
+        class='w-44 h-44 rounded-md object-cover'
+        src="{{ info.photo.url }}" alt="Photo de {{ info.firstname }} {{ info.lastname }}">
+      </div>
+
+      <div class='flex flex-row justify-center items-center w-full h-auto '>
+        <a href="{% url 'pages:detail_cv_pdf_style_1' pk=info.pk %}" class="btn btn-primary w-44">Download style 1 </a>
+      </div>
+    </div>
+
+    <div class='w-auto h-auto flex flex-col justify-center items-center gap-4'>
+      <div class='w-44  border-2 rounded-md  '>
+        <img 
+        class='w-44 h-44 rounded-md object-cover'
+        src="{{ info.photo.url }}" alt="Photo de {{ info.firstname }} {{ info.lastname }}">
+      </div>
+
+      <div class='flex flex-row justify-center items-center w-full h-auto '>
+        <a href="{% url 'pages:detail_cv_pdf_style_2' pk=info.pk %}" class="btn btn-primary w-44">Download style 2</a>
+      </div>
+    </div>
+
+
+    <div class='w-auto h-auto flex flex-col justify-center items-center gap-4'>
+      <div class='w-44  border-2 rounded-md  '>
+        <img 
+        class='w-44 h-44 rounded-md object-cover'
+        src="{{ info.photo.url }}" alt="Photo de {{ info.firstname }} {{ info.lastname }}">
+      </div>
+
+      <div class='flex flex-row justify-center items-center w-full h-auto '>
+        <a href="{% url 'pages:detail_cv_pdf_style_3' pk=info.pk %}" class="btn btn-primary w-44">Download style 3</a>
+      </div>
     </div>
 
   </div>
 
   <main class="container mx-auto ">
     <section class="flex flex-col w-full">
-      <div class="container mx-auto flex flex-col bg-slate-50">
+      <div class="container mx-auto flex flex-col bg-white">
 
         <div class='flex flex-row justify-start items-start w-full p-4 gap-11'>
           <div class='flex flex-col w-1/4  h-full'>
               <h3 class="flex justify-center font-bold text-4xl mt-2">{{ info.lastname }}</h3>
               <h4 class="flex justify-center font-bold text-4xl mt-2">{{ info.firstname }}</h4>
 
+
               <h4 class="text-xl my-10 ">{{ info.type_of_Contract }}</h4>
+
+
+
 
               <div class="flex justify-center items-center w-full my-2">
                 <img 
@@ -76,6 +114,9 @@
                 </div>
               </div>
             </div>
+
+
+
 
 
             <div class="flex flex-col justify-start items-center w-3/4 h-full">

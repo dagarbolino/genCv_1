@@ -1,6 +1,5 @@
 from django.urls import path
 
-
 from .views import dashboard, InfoListView, InfoCreateView, home, generate_pdf, InfoUpdateView, InfoDetailView, InfoDeleteView, HobbiCreateView, SkillCreateView, SkillListView, LanguageCreateView, FormationCreateView, ExperienceCreateView, ExperienceListView, ExperienceDeleteView, SkillDeleteView, FormationListView, FormationDeleteView, LanguageListView, LanguageDeleteView, HobbiListView, HobbyDeleteView
 app_name = "pages"
 
@@ -37,8 +36,8 @@ urlpatterns = [
     path('experience_list/', ExperienceListView.as_view(), name='experience_list'),
     path('experience_delete/<int:pk>/', ExperienceDeleteView.as_view(), name='experience_delete'),
     
-    
-    path('curriculum-pdf/<int:pk>/', generate_pdf, name='curriculum_pdf'),
 
+    path('curriculum-pdf-/<int:pk>/', generate_pdf, name='detail_cv_pdf'),
+    
 
 ]

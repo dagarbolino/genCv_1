@@ -6,12 +6,13 @@
     <meta charset="UTF-8">
     <title>CV</title>
 
-    <link href="{{ request.build_absolute_uri|default:"http://localhost:8000" }}{% static 'assets/app-BxMXD0Pt.css' %}" rel="stylesheet">
-
+      <link href="{{ request.build_absolute_uri|default:"http://localhost:8000" }}{% static 'assets/app-DI3wmm6_.css' %}" rel="stylesheet">
 
 </head>
 <body>
-  <main class="container mx-auto  bg-white text-black">
+
+
+  <main class="container mx-auto font-sans bg-slate-50 text-black">
     <section class="flex flex-col w-full">
       <div class="container mx-auto flex flex-col">
 
@@ -20,11 +21,7 @@
               <h3 class="flex justify-center font-bold text-3xl mt-2">{{ info.lastname }}</h3>
               <h4 class="flex justify-center font-bold text-3xl mt-2">{{ info.firstname }}</h4>
 
-
               <h4 class="text-xl my-9 ">{{ info.type_of_Contract }}</h4>
-
-
-
 
               <div class="flex justify-center items-center w-full ">
                 <img class='w-52 h-52 rounded-full border-2 border-gray-400 object-cover'

@@ -290,3 +290,5 @@ def generate_pdf(request, pk):
     response["Content-Disposition"] = 'attachment; filename="cv.pdf"'
     return response
     
+    
+    
